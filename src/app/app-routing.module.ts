@@ -11,7 +11,7 @@ import { ScenarioTestDialogComponent } from './entities/perimetre/detail/dialogs
 const routes: Routes = [
   {
     path:'', 
-    redirectTo:'/perimetre',
+    redirectTo:'/home',
     pathMatch:'full'
   },
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
     component:TesteurComponent
   },
   {
-    path:':id/view', 
+    path:':id/:nomRelase/view', 
     component:DetailReleaseComponent
   },
   {

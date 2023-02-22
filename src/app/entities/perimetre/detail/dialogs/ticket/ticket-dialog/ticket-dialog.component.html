@@ -32,7 +32,7 @@
 
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Testeur</mat-label>
-                                <mat-select formControlName="testeur">
+                                <mat-select formControlName="testeur" required>
                                   <mat-option value=""></mat-option>
                                   <mat-option *ngFor="let testeur of listTesteur" [value]="testeur">{{testeur.prenom}} {{testeur.nom}}</mat-option>
                                 </mat-select>
@@ -41,8 +41,7 @@
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Release</mat-label>
                                 <mat-select formControlName="release" required>
-                                  <mat-option value=""></mat-option>
-                                  <mat-option *ngFor="let release of listRelease" [value]="release">RPP-{{release.refRelease}}</mat-option>
+                                  <mat-option [value]="listRelease">{{listRelease.nomRelease}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </form>
@@ -57,8 +56,6 @@
                             </button>
                         </mat-toolbar>
                     </mat-step>
-        
-        
                 
                     
                 </mat-stepper>

@@ -4,12 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Route } from '@angular/router';
+import { ManagerComponent } from '../manager/manager.component';
 import { AnomalieService } from '../services/anomalie/anomalie.service';
 import { ReleaseService } from '../services/release/release.service';
 import { CasService } from '../services/test/cas/cas.service';
 import { ScenarioService } from '../services/test/scenario/scenario.service';
 import { TicketService } from '../services/ticket/ticket.service';
 import { DialogEditComponent } from './dialog/dialog-edit/dialog-edit.component';
+import { PerimetreDialogComponent } from './dialog/perimetre-dialog/perimetre-dialog.component';
 
 @Component({
   selector: 'app-perimetre',
@@ -65,24 +67,15 @@ export class PerimetreComponent implements OnInit{
 
 
   deleteRelease(refRelease: number){
-    this.ticketService.getAllTicketForRelease(refRelease)
+    this.releaseService.deleteRelease(refRelease)
     .subscribe({
-      next:(res) =>{
-        if(res){
-          res.array.forEach((element: number) =>  {
-            this.ticketService.deleteTicket(element);
-          });
-          this.releaseService.deleteRelease(refRelease)
-          .subscribe({
-            next:(value) =>{
-                this.getAllPerimetre();
-            },
-            error:()=>{
-              alert("Impossible de supprimer les elements");
-            }
-          })
-        }
-      }
+      next:(value) =>{
+          alert("Release Supprimer avec Succès");
+          this.getAllPerimetre();
+      },
+      error(err) {
+          alert("Impossible de Supprimer cette Release");
+      },
     })
   }
 
@@ -96,6 +89,14 @@ export class PerimetreComponent implements OnInit{
     });
   }
 
+  openDialogManager(){ 
+    this.dialog.open(PerimetreDialogComponent, {
+      width: '60%'
+    }).afterClosed().subscribe(()=>{
+      this.getAllPerimetre();
+      
+    });
+  }
   
 
   

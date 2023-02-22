@@ -11,6 +11,7 @@ import { ScenarioService } from 'src/app/entities/services/test/scenario/scenari
 import { TicketService } from 'src/app/entities/services/ticket/ticket.service';
 import { AnomalieDialogComponent } from '../dialogs/anomalie/anomalie-dialog/anomalie-dialog.component';
 import { CasTestDialogComponent } from '../dialogs/casTest/cas-test-dialog/cas-test-dialog.component';
+import { ManagerDialogComponent } from '../dialogs/manager/manager-dialog/manager-dialog.component';
 import { TicketDialogComponent } from '../dialogs/ticket/ticket-dialog/ticket-dialog.component';
 
 @Component({
@@ -22,6 +23,7 @@ export class DetailReleaseComponent implements OnInit{
 
   id!: number;
   detail: any;
+  info: any;
 
   displayedColumnsTicket: string[] = ['titre', 'type', 'testeur','casTest', 'scenario', 'cloture','criticite','cours','priorite', 'statut', 'action'];
   dataSourceTicket!: MatTableDataSource<any>;
@@ -45,7 +47,7 @@ export class DetailReleaseComponent implements OnInit{
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(() => {
       this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-      this.detail = this.activatedRoute.snapshot.paramMap.get('row');
+      this.info = this.activatedRoute.snapshot.paramMap.get('nomRelase');
     });
 
     if(this.id){
@@ -81,17 +83,18 @@ export class DetailReleaseComponent implements OnInit{
   }
 
   editDialogTicket(row: any){ 
-    // this.dialog.open(DialogEditComponent, {
-    //   width: '50%',
-    //   data: row
-    // }).afterClosed().subscribe(()=>{
-    //     this.getAllPerimetre();
+    this.dialog.open(ManagerDialogComponent, {
+      width: '50%',
+      data: row
+    }).afterClosed().subscribe(()=>{
+      this.getAllTicket(this.id);
       
-    // });
+    });
   }
 
-  ajoutDialogTicket(){ 
-    this.dialog.open(TicketDialogComponent, {
+  ajoutDialogTicket(id: number){ 
+    this.dialog.open(TicketDialogComponent,{
+      data:{id},
       width: '50%',
     }).afterClosed().subscribe(()=>{
       this.getAllTicket(this.id);
@@ -118,16 +121,71 @@ export class DetailReleaseComponent implements OnInit{
   }
 
 
-  deleteTicket(id: number){
-    this.ticketService.deleteTicket(id)
-    .subscribe({
-      next:(res) =>{
-          this.getAllTicket(this.id);
-      },
-      error:()=>{
+  deleteTicket(id: number, idC: number, idA:number){
+    if ((idC!==null && idA!==null)) {
+      this.ticketService.deleteTicket(id)
+        .subscribe({
+          next:(_res) =>{
+            this.anomalieService.deleteAnomalie(idA)
+            .subscribe({
+              next:(_value) =>{
+                this.casTestService.deleteCasTest(idC)
+                .subscribe({
+                  next:(_value) =>{
+                    alert("Ticket, Anomalie, Cas De Test supprimés avec succès!!!");
+                    this.getAllTicket(this.id); 
+                  },
+                })
+              },
+            })    
+          },
+        })
+        alert("Ticket, Anomalie supprimés avec succès!!!");
         this.getAllTicket(this.id);
       }
-    })
+      else if((idC!==null && idA===null)){
+        this.ticketService.deleteTicket(id)
+            .subscribe({
+              next:(_res) =>{
+                this.casTestService.deleteCasTest(idC)
+                .subscribe({
+                  next:(_value) =>{
+                  },
+                })
+              },
+            })
+            alert("Ticket, Cas De Test supprimés avec succès!!!");
+            this.getAllTicket(this.id);
+      }
+      else if((idC===null && idA!==null)){
+        this.ticketService.deleteTicket(id)
+            .subscribe({
+              next:(_res) =>{
+                this.anomalieService.deleteAnomalie(idC)
+                .subscribe({
+                  next:(_value) =>{
+                    
+                  },
+                })
+              },
+            })
+            alert("Ticket, Anomalies supprimés avec succès!!!");
+            this.getAllTicket(this.id);
+      }
+      else{
+        this.ticketService.deleteTicket(id)
+        .subscribe({
+          next:(_res) =>{
+              alert("Ticket supprimé avec succès!!!");
+              this.getAllTicket(this.id);
+          },
+          error:()=>{
+            this.getAllTicket(this.id);
+          }
+        })
+        alert("Ticket supprimé avec succès!!!");
+        this.getAllTicket(this.id);
+      }
   }
 
   // Partie Anomalie
@@ -145,9 +203,10 @@ export class DetailReleaseComponent implements OnInit{
   deleteAnomalie(id: number){
     this.anomalieService.deleteAnomalie(id)
     .subscribe({
-      next:(res) =>{
+      next:(_res) =>{
           this.getAllAnomalie();
       },
     })
   }
+  
 }

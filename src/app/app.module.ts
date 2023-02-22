@@ -55,6 +55,8 @@ import { ScenarioTestDialogComponent } from './entities/perimetre/detail/dialogs
 import { AnomalieDialogComponent } from './entities/perimetre/detail/dialogs/anomalie/anomalie-dialog/anomalie-dialog.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { DetailScenarioDialogComponent } from './entities/perimetre/detail/dialogs/scenarioTest/detail-sceario/detail-scenario-dialog/detail-scenario-dialog.component';
+import { ManagerDialogComponent } from './entities/perimetre/detail/dialogs/manager/manager-dialog/manager-dialog.component';
+import { PerimetreDialogComponent } from './entities/perimetre/dialog/perimetre-dialog/perimetre-dialog.component';
 
 
 @NgModule({
@@ -79,7 +81,8 @@ import { DetailScenarioDialogComponent } from './entities/perimetre/detail/dialo
     ScenarioTestDialogComponent,
     AnomalieDialogComponent,
     DetailScenarioDialogComponent,
-   
+    ManagerDialogComponent,
+    PerimetreDialogComponent
   ],
   imports: [
     BrowserModule,

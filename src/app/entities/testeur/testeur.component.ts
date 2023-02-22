@@ -83,8 +83,9 @@ export class TesteurComponent implements OnInit, AfterViewInit{
           alert("Testeur supprimer avec succes");
           this.getAllTesteur();
         },
-        error:()=>{
+        error:(error)=>{
           alert("Impossible de supprimer ce testeur");
+          this.getAllTesteur();
         }
       })
     }

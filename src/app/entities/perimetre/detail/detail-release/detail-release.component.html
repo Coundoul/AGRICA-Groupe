@@ -1,9 +1,14 @@
 <div class="container-fluide page">
-    <div class="page_box p-3 mt-2">Détail Release RPP-{{ id }}</div>
+    <div class="page_box p-3 mt-2">Détail Release {{ info }}</div>
     <div class="page_content shadow p-3 position-relative">
 
       <mat-toolbar style="background-color: white;">
-        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogTicket()">
+        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" [routerLink]="['' ,id, info, 'dashboard']">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+        <span class="example-spacer"></span>
+        <button mat-fab extended  color="primary" aria-label="Example icon-button with share icon" (click)="ajoutDialogTicket(id)">
           <mat-icon>add</mat-icon>
           Ticket
         </button>
@@ -105,7 +110,7 @@
                               <mat-icon>edit</mat-icon>
                           </button>
 
-                          <button mat-icon-button color="warn"  (click)="deleteTicket(row.refTicket)">
+                          <button mat-icon-button color="warn"  (click)="deleteTicket(row.refTicket, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)">
                             <mat-icon>delete</mat-icon>
                           </button>
 

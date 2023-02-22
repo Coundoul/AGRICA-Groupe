@@ -145,30 +145,30 @@ export class DashbordComponent implements OnInit, OnDestroy{
             
 
             this.data = {
-                labels: ['Ticket Total', 'Tickets Couvert','OK','KO', 'Non testés', 'Abandonnés', 'Bloquée','Hors Périmètre'],
+                labels: ['OK','KO', 'Non testés', 'Abandonnés', 'Bloquée','Hors Périmètre'],
                 datasets: [
                     {
                         
-                        data: [this.tt, this.tc, this.ok, this.ko, this.nt, this.ab, this.bl, this.hp],
+                        data: [this.ok, this.ko, this.nt, this.ab, this.bl, this.hp],
                         backgroundColor: [
-                            "#FF6384",
+                           
                             "#36A2EB",
                             "#FFCE56",
                             "#7E57C2",
                             "#66BB6A",
                             "#370028",
-                            "#26C6DA",
-                            "#FE9901"
+                            "#26C6DA"
+                            
                         ],
                         hoverBackgroundColor: [
-                            "#FF6384",
+                            
                             "#36A2EB",
                             "#FFCE56",
                             "#7E57C2",
                             "#66BB6A",
                             "#370028",
-                            "#26C6DA",
-                            "#FE9901"
+                            "#26C6DA"
+                            
         
                         ]
                     }
@@ -212,27 +212,23 @@ export class DashbordComponent implements OnInit, OnDestroy{
             
 
             this.dataTest = {
-                labels: ['Cas De Test Total','Cas de Test lié à un ticket','OK','KO', 'Bloqués', 'Non Testés', 'Hors Périmètre'],
+                labels: ['OK','KO', 'Bloqués', 'Non Testés', 'Hors Périmètre'],
                 datasets: [
                     {
-                        data: [this.ctt, this.ctlt,this.cok, this.cko, this.cbl, this.cnt, this.chp],
+                        data: [this.cok, this.cko, this.cbl, this.cnt, this.chp],
                         backgroundColor: [
                             "#FF00FF",
                             "#000080",
                             "#00FF00",
                             "#800000",
-                            "#FF0000",
-                            "#A4A140",
-                            "#A45140"
+                            "#FF0000"
                         ],
                         hoverBackgroundColor: [
                             "#FF00FF",
                             "#000080",
                             "#00FF00",
                             "#800000",
-                            "#FF0000",
-                            "#A4A140",
-                            "#A45140"
+                            "#FF0000"
                         ]
                     }
                 ]

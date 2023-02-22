@@ -32,6 +32,7 @@ export class DialogComponent implements OnInit{
     }
   }
 
+
   addTesteur(){
     if(!this.editData){
       if(this.testeurForm.valid){
@@ -43,7 +44,7 @@ export class DialogComponent implements OnInit{
             this.dialogRef.close('save');
           },
           error:()=>{
-            alert("Impossible d'ajouter un nouveau testeur")
+            alert("Impossible d'envoyer les données sur le serveur")
           }
         })
       }

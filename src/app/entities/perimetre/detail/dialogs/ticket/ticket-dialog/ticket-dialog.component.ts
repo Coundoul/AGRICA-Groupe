@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Validators, FormControl, FormBuilder } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IRelease, ITesteur } from 'src/app/entities/manager/manger.model';
 import { ReleaseService } from 'src/app/entities/services/release/release.service';
 import { TicketService } from 'src/app/entities/services/ticket/ticket.service';
@@ -14,8 +14,8 @@ import { TesteurService } from 'src/app/entities/testeur/service/testeur.service
 export class TicketDialogComponent implements OnInit{
 
   FormGroup2 = this._formBuilder.group({
-    titre: ['', Validators.required],
-    type: ['', Validators.required],
+    titre: [null, Validators.required],
+    type: [null, Validators.required],
     anomalies:[null, Validators.required],
     casDeTest:[null, Validators.required],
     release: new FormControl(null),
@@ -24,11 +24,11 @@ export class TicketDialogComponent implements OnInit{
 
   listTesteur!: ITesteur[] ;
 
-  listRelease!: IRelease[] ;
+  listRelease!: any;
 
   public constructor(private _formBuilder: FormBuilder, public testeurService : TesteurService, 
     public releaseService : ReleaseService, public ticketService : TicketService,public dialog: MatDialog, 
-    private dialogRef : MatDialogRef<TicketDialogComponent>){}
+    private dialogRef : MatDialogRef<TicketDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:any){}
   
   ngOnInit(): void {
     this.testeurService.getAllTesteur()
@@ -36,22 +36,25 @@ export class TicketDialogComponent implements OnInit{
         this.listTesteur = response;
       });
 
-    this.releaseService.getAllRelease()
+    this.releaseService.getRelease(Number(this.data?.id))
     .subscribe(response =>{
       this.listRelease = response;
-    })
+    });
   }
 
   addTicket(){
-    this.ticketService.postTicket(this.FormGroup2.value)
-    .subscribe({
-      next:(value)=> {
-          alert("Ticket ajouter avec success!!!");
-          this.dialogRef.close('save')
-      },error:(err) =>{
-          alert("Impossible d'envoyer les donner. Veuillez réassayer ultérieurement!!!")
-      },
-    })
+    if (this.FormGroup2.value.titre!==null && this.FormGroup2.value.type!==null && this.FormGroup2.value.testeur!==null &&
+      this.FormGroup2.value.release!==null) {
+        this.ticketService.postTicket(this.FormGroup2.value)
+      .subscribe({
+        next:(value)=> {
+            alert("Ticket ajouter avec success!!!");
+            this.dialogRef.close('save')
+        },error:(err) =>{
+            alert("Impossible d'envoyer les donner. Veuillez réassayer ultérieurement!!!")
+        },
+      })
+    }
   }
 
 }

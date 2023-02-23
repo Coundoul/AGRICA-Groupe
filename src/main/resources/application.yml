@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://51.77.132.116:3306/testingManageBack?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: dave
+    password: passer1234
+    hikari:
+      initialization-fail-timeout: 0
+  jpa:
+    database-platform: org.hibernate.dialect.MYSQL5Dialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create

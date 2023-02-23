@@ -1,7 +1,15 @@
 FROM ubuntu:20.04
 
-EXPOSE 9092
+RUN apt-get update --fix-missing
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y default-jdk && apt-get install -y maven
+RUN export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 
-ADD target/spring-boot-docker.jar spring-boot-docker.jar
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm
 
-ENTRYPOINT ["java", "-jar","/spring-boot-docker.jar"]
+COPY . /testingManageBackEnd
+WORKDIR /testingManageBackEnd
+RUN mvn spring-boot-maven-plugin
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dblabla", "-jar","/testingManageBackEnd/target/testingManageBackEnd-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=prod,api-docs,no-liquibase"]

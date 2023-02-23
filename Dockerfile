@@ -1,7 +1,4 @@
-FROM ubuntu:20.04
-
+FROM adoptopenjdk/openjdk17:alpine-jre
 EXPOSE 9092
-
-ADD target/spring-boot-docker.jar spring-boot-docker.jar
-
-ENTRYPOINT ["java", "-jar","/spring-boot-docker.jar"]
+ADD target/testingManageBackEnd-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]

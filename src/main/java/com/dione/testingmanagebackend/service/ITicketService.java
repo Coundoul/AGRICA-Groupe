@@ -10,6 +10,7 @@ public interface ITicketService {
     Ticket updateTicket( Ticket ticket) throws ResourceNotFoundException;
     Ticket addTicket(Ticket ticket);
     void deleteTicket(Long refTicket);
+
     List<Ticket> getAllTicket();
 
     List<Ticket> getAllTicketForRelease(Long id);

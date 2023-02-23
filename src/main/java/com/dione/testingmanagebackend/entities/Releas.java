@@ -1,19 +1,15 @@
 package com.dione.testingmanagebackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
@@ -25,9 +21,12 @@ public class Releas implements Serializable {
     private Date datePrevision;
     private Date dateReelle;
 
-//    @OneToMany(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER, mappedBy="release", orphanRemoval=true)
+    @OneToMany(mappedBy = "release", cascade = CascadeType.REMOVE)
+    private Set<Ticket> tickets= new HashSet<>();
+
+//    @OneToMany(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY, mappedBy="release", orphanRemoval=true)
 //    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-//    private Set<Ticket> tickets;
+//    private Set<Ticket> tickets= new HashSet<>();
 
 //    @OneToMany(mappedBy = "release",
 //            cascade = CascadeType.ALL,

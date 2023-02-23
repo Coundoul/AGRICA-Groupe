@@ -106,7 +106,7 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-ticket> Action </th>
                         <td mat-cell *matCellDef="let row">
 
-                          <button mat-icon-button color="primary" (click)="editDialogTicket(row)">
+                          <button mat-icon-button color="primary" (click)="editDialogTicket(row, row.release.refRelease, row.casDeTest?.refCasTest, row.anomalies?.refAnomalie)">
                               <mat-icon>edit</mat-icon>
                           </button>
 

@@ -33,7 +33,7 @@
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Testeur</mat-label>
                                 <mat-select formControlName="testeur" required>
-                                  <mat-option [value]="testeur">{{testeur?.prenom}} {{testeur?.nom}}</mat-option>
+                                  <mat-option value=""></mat-option>
                                   <mat-option *ngFor="let testeurs of listTesteur" [value]="testeurs">{{testeurs.prenom}} {{testeurs.nom}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -49,14 +49,14 @@
                         </mat-toolbar>
                     </mat-step>
         
-                    <mat-step [stepControl]="FormGroup6" optional>
+                    <mat-step [stepControl]="FormGroup3" optional>
                         <ng-template matStepLabel>Test</ng-template>
-                        <form [formGroup]="FormGroup6" class="mt-3">
+                        <form [formGroup]="FormGroup3" class="mt-3">
                             <h2 style="text-align: center;">Cas De Test</h2>
 
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Resultat</mat-label>
-                                <mat-select formArrayName="resutat">
+                                <mat-select formControlName="resultat">
                                   <mat-option value=""></mat-option>
                                   <mat-option value="En_Cours">En Cours</mat-option>
                                   <mat-option value="OK">OK</mat-option>
@@ -66,12 +66,6 @@
                                   <mat-option value="Non_Teste">Non testée</mat-option>
                                   <mat-option value="Hors_Perimetre">Hors Périmètre</mat-option>
                                 </mat-select>
-                            </mat-form-field>
-                            
-                            <h2 style="text-align: center;">Scénario Test</h2>
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Scénario</mat-label>
-                                <input matInput placeholder="nom scenario" formControlName="scenario">
                             </mat-form-field>
                             
 
@@ -152,9 +146,9 @@
                             <button  mat-fab extended  color="primary" aria-label="Example icon-button with share icon" matStepperPrevious>
                                 <mat-icon>keyboard_arrow_left</mat-icon>Retour
                             </button> | 
-                            <!-- <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="addManager()">
+                            <button mat-fab extended  color="accent" aria-label="Example icon-button with share icon" (click)="updatePerimetreManager()">
                                 Envoyer<mat-icon>check</mat-icon>
-                            </button> -->
+                            </button>
                         </mat-toolbar>
                     </mat-step>
                     

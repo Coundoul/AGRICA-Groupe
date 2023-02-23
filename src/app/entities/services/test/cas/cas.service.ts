@@ -16,6 +16,10 @@ export class CasService {
     return this.http.get<any>("http://localhost:9092/casTestManager");
   }
 
+  getCasTest(id : number){
+    return this.http.get<any>("http://localhost:9092/casTestManager/"+id);
+  }
+
   putCasTest(data : any, id : number){
     return this.http.put<any>("http://localhost:9092/casTestManager/"+id, data);
   }

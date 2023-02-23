@@ -82,10 +82,10 @@ export class DetailReleaseComponent implements OnInit{
     }
   }
 
-  editDialogTicket(row: any){ 
+  editDialogTicket(row: any, idR:number, idC:number|null, idA: number|null){ 
     this.dialog.open(ManagerDialogComponent, {
       width: '50%',
-      data: row
+      data: {row, idR, idC, idA}
     }).afterClosed().subscribe(()=>{
       this.getAllTicket(this.id);
       

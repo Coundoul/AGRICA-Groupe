@@ -1,0 +1,13 @@
+version: "3.5"
+
+
+services:
+
+  angular-services:
+    container_name: angular-service-container
+    build: ./opt/projet/AGRICA_Groupe
+    volumes:
+      - './opt/projet/AGRICA_Groupe'
+      ports:
+      - '4200:4200'
+

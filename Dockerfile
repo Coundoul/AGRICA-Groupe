@@ -11,6 +11,4 @@ RUN npm install -g @angular/cli@15.1.6
 
 EXPOSE 4200
 
-RUN npm run build --prod
-
 CMD ["npm", "start"]

@@ -5,8 +5,8 @@ services:
     container_name: angular-container
     build : ./
     volumes:
-      - './:/usr/sc/app'
+    - './:/usr/sc/app'
     ports:
       - '4201:4200'
-    command:
+    command: >
       bash -c "npm start"

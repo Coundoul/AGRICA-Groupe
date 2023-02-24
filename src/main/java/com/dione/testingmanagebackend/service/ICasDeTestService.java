@@ -9,6 +9,7 @@ public interface ICasDeTestService {
     CasDeTest getCasDeTest(Long refCasTest) throws ResourceNotFoundException;
     CasDeTest updateCasDeTest (CasDeTest casTest) throws ResourceNotFoundException;
     CasDeTest addCasDeTest(CasDeTest casTest);
+
     void deleteCasDeTest(Long refCasTest);
     List<CasDeTest> getAllCasDeTest();
     Object getCasVisionTest(Long id);

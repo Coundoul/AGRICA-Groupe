@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 51.77.132.116",
+    "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
 

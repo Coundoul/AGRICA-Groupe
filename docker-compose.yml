@@ -8,6 +8,6 @@ services:
     build: ./opt/projet/AGRICA_Groupe
     volumes:
       - './opt/projet/AGRICA_Groupe'
-      ports:
+    ports:
       - '4200:4200'
 

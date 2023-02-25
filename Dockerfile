@@ -1,4 +1,19 @@
+# syntax=docker/dockerfile:1
+
 FROM openjdk:17
-LABEL maintainer="javaguides.net"
-ADD target/spring-boot-docker.jar spring-boot-docker.jar
-ENTRYPOINT ["java","-jar","spring-boot-docker.jar"]
+
+RUN mkdir -p /app-backend
+
+WORKDIR /app-backend
+
+COPY .mvn/ .mvn
+
+COPY mvnw pom.xml ./
+
+RUN ./mvnw dependency:resolve
+
+COPY src ./src
+
+EXPOSE 9092
+
+CMD ["./mvnw", "spring-boot:run"]

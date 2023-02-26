@@ -102,8 +102,9 @@ export class DetailReleaseComponent implements OnInit{
     });
   }
 
-  ajoutDialogAnomalie(){ 
+  ajoutDialogAnomalie(id: number){ 
     this.dialog.open(AnomalieDialogComponent, {
+      data:{id},
       width: '50%',
     }).afterClosed().subscribe(()=>{
       this.getAllTicket(this.id);
@@ -111,8 +112,9 @@ export class DetailReleaseComponent implements OnInit{
     });
   }
 
-  ajoutDialogaCasTest(){ 
+  ajoutDialogaCasTest(id: number){ 
     this.dialog.open(CasTestDialogComponent, {
+      data:{id},
       width: '50%',
     }).afterClosed().subscribe(()=>{
       this.getAllTicket(this.id);

@@ -51,12 +51,7 @@ export class CasTestDialogComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.releaseService.getRelease(Number(this.data?.id))
-    .subscribe(response =>{
-      this.refRelease = response;
-    });
-
-    this.ticketService.getAllTicketForRelease(this.refRelease)
+    this.ticketService.getAllTicketForRelease(Number(this.data?.id))
     .subscribe(response =>{
       this.listTicket = response;
     })

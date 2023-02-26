@@ -9,22 +9,22 @@ export class AnomalieService {
   constructor(private http: HttpClient) { }
 
   postAnomalie(data : any){
-    return this.http.post<any>("http://localhost:9092/anomalieManager", data);
+    return this.http.post<any>("http://51.77.132.116:9092/anomalieManager", data);
   }
 
   getAllAnomalie(){
-    return this.http.get<any>("http://localhost:9092/anomalieManager");
+    return this.http.get<any>("http://51.77.132.116:9092/anomalieManager");
   }
 
   putAnomalie(data : any, id : number){
-    return this.http.put<any>("http://localhost:9092/anomalieManager/"+id, data);
+    return this.http.put<any>("http://51.77.132.116:9092/anomalieManager/"+id, data);
   }
 
   getAnomalie(id : number){
-    return this.http.get<any>("http://localhost:9092/anomalieManager/"+id);
+    return this.http.get<any>("http://51.77.132.116:9092/anomalieManager/"+id);
   }
 
   deleteAnomalie(id : number){
-    return this.http.delete<any>("http://localhost:9092/anomalieManager/"+id);
+    return this.http.delete<any>("http://51.77.132.116:9092/anomalieManager/"+id);
   }
 }

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ITesteur, IRelease, ITicket } from 'src/app/entities/manager/manger.model';
 import { AnomalieService } from 'src/app/entities/services/anomalie/anomalie.service';
 import { ReleaseService } from 'src/app/entities/services/release/release.service';
@@ -22,6 +22,8 @@ export class AnomalieDialogComponent {
     statut: [null, Validators.required],
     ticket: [null, Validators.required],
   });
+
+  refRelease!: number
   
   FormGroup1 = this._formBuilder.group({
     cloturee: [null, Validators.required],
@@ -44,11 +46,16 @@ export class AnomalieDialogComponent {
 
   public constructor(private _formBuilder: FormBuilder, public testeurService : TesteurService, 
     public releaseService : ReleaseService, public ticketService : TicketService,public anomalieService: AnomalieService,public dialog: MatDialog, 
-    private dialogRef : MatDialogRef<TicketDialogComponent>){}
+    private dialogRef : MatDialogRef<TicketDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:any){}
   
   ngOnInit(): void {
 
-    this.ticketService.getAllTicket()
+    this.releaseService.getRelease(Number(this.data?.id))
+    .subscribe(response =>{
+      this.refRelease = response;
+    });
+
+    this.ticketService.getAllTicketForRelease(this.refRelease)
     .subscribe(response =>{
       this.listTicket = response;
     })

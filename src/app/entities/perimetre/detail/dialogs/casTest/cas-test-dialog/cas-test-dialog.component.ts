@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ITicket } from 'src/app/entities/manager/manger.model';
 import { ReleaseService } from 'src/app/entities/services/release/release.service';
 import { CasService } from 'src/app/entities/services/test/cas/cas.service';
@@ -22,6 +22,8 @@ export class CasTestDialogComponent implements OnInit{
     scenario: [null, Validators.required],
     ticket: new FormControl(null)
   });
+
+  refRelease!: number;
 
 
   FormGroup3 = this._formBuilder.group({
@@ -45,10 +47,16 @@ export class CasTestDialogComponent implements OnInit{
   
   public constructor(private _formBuilder: FormBuilder, public testeurService : TesteurService, 
     public releaseService : ReleaseService, public ticketService : TicketService, public casDeTest : CasService,public dialog: MatDialog, 
-    private dialogRef : MatDialogRef<TicketDialogComponent>){}
+    private dialogRef : MatDialogRef<TicketDialogComponent>,@Inject(MAT_DIALOG_DATA) public data:any){}
 
   ngOnInit(): void {
-    this.ticketService.getAllTicket()
+
+    this.releaseService.getRelease(Number(this.data?.id))
+    .subscribe(response =>{
+      this.refRelease = response;
+    });
+
+    this.ticketService.getAllTicketForRelease(this.refRelease)
     .subscribe(response =>{
       this.listTicket = response;
     })

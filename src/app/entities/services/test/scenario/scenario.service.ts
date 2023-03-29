@@ -9,23 +9,23 @@ export class ScenarioService {
   constructor(private http: HttpClient) { }
 
   postScenario(data : any){
-    return this.http.post<any>("http://51.77.132.116:9092/scenarioManager", data);
+    return this.http.post<any>("http://51.77.132.116:9097/scenarioManager", data);
   }
 
   getAllScenario(){
-    return this.http.get<any>("http://51.77.132.116:9092/scenarioManager");
+    return this.http.get<any>("http://51.77.132.116:9097/scenarioManager");
   }
 
   getAllScenarioForCasTest(id: number){
-    return this.http.get<any>("http://51.77.132.116:9092/scenarioManager/casTest/"+id);
+    return this.http.get<any>("http://51.77.132.116:9097/scenarioManager/casTest/"+id);
   }
 
   putScenario(data : any, id : number){
-    return this.http.put<any>("http://51.77.132.116:9092/scenarioManager/"+id, data);
+    return this.http.put<any>("http://51.77.132.116:9097/scenarioManager/"+id, data);
   }
 
   deleteScenario(id : number){
-    return this.http.delete<any>("http://51.77.132.116:9092/scenarioManager/"+id);
+    return this.http.delete<any>("http://51.77.132.116:9097/scenarioManager/"+id);
   }
   
 }
